@@ -1,0 +1,25 @@
+{
+  "name": "mean-book",
+  "version": "1.0.0",
+  "description": "MEAN book code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubuntumaroon/MEAN-book.git"
+  },
+  "keywords": [
+    "MEAN"
+  ],
+  "author": "feng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ubuntumaroon/MEAN-book/issues"
+  },
+  "homepage": "https://github.com/ubuntumaroon/MEAN-book#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
