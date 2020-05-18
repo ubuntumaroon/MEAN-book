@@ -43,7 +43,7 @@ class IssueTable extends React.Component {
       padding: 4
     };
     var issueRows = issues.map(issue => /*#__PURE__*/React.createElement(IssueRow, {
-      rowStyle: rowStyle,
+      key: issue.id,
       issue: issue
     }));
     return /*#__PURE__*/React.createElement("table", {

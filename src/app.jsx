@@ -44,7 +44,7 @@ class IssueRow extends React.Component {
 class IssueTable extends React.Component {
   render() {
     const rowStyle = {border:"1px solid silver", padding: 4};
-    const issueRows = issues.map(issue => <IssueRow rowStyle={rowStyle} issue={issue}/>);
+    const issueRows = issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
     return (
       <table style={{borderCollapse: "collapse"}}>
         <thead>
