@@ -3,19 +3,33 @@
 /**
  * 
  */
-class HelloWorld extends React.Component {
+class IssueFilter extends React.Component {
   render() {
-    var continents = ['Africa', 'America', 'Asia', 'Australia', 'Europe'];
-    var helloContinents = Array.from(continents, c => "Hello ".concat(c, ", "));
-    var message = helloContinents.join(' ');
-    return /*#__PURE__*/React.createElement("div", {
-      title: "Outer div"
-    }, /*#__PURE__*/React.createElement("h1", {
-      className: "header"
-    }, " ", message, " "));
+    return /*#__PURE__*/React.createElement("div", null, "All issue filters");
   }
 
 }
 
-var element = /*#__PURE__*/React.createElement(HelloWorld, null);
+class IssueTable extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, "Issue Table.");
+  }
+
+}
+
+class IssueAdd extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, "Add Issue component");
+  }
+
+}
+
+class IssueList extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Issue Tracker"), /*#__PURE__*/React.createElement(IssueFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, null));
+  }
+
+}
+
+var element = /*#__PURE__*/React.createElement(IssueList, null);
 ReactDOM.render(element, document.getElementById('contents'));

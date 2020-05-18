@@ -1,21 +1,47 @@
 /**
  * 
  */
-class HelloWorld extends React.Component {
-  render() {
-    const continents = ['Africa','America','Asia','Australia','Europe'];
-    const helloContinents = Array.from(continents, c => `Hello ${c}, `);
-    const message = helloContinents.join(' ');
 
+class IssueFilter extends React.Component {
+  render() {
     return (
-      <div title = "Outer div">
-        <h1 className = 'header'> {message} </h1>  
+      <div>
+        All issue filters
       </div>
     );
   }
-
 }
 
-const element = <HelloWorld />;
+class IssueTable extends React.Component {
+  render() {
+    return (
+      <div>Issue Table.</div>
+    );
+  }
+}
+
+class IssueAdd extends React.Component {
+  render() {
+    return (
+      <div>Add Issue component</div>
+    );
+  }
+}
+
+class IssueList extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <h1>Issue Tracker</h1>
+        <IssueFilter />
+        <hr />
+        <IssueTable />
+        <hr />
+        <IssueTable />
+      </React.Fragment>
+    );
+  }
+}
+const element = <IssueList />;
 ReactDOM.render(element, document.getElementById('contents'));
 
