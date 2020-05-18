@@ -14,12 +14,36 @@ class IssueFilter extends React.Component {
 
 class IssueTable extends React.Component {
   render() {
+    const rowStyle = {border:"1px solid silver", padding: 4};
     return (
-      <div>Issue Table.</div>
+      <table style={{borderCollapse: "collapse"}}>
+        <thead>
+          <tr>
+            <th style={rowStyle}>ID</th>
+            <th style={rowStyle}>Title</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <IssueRow rowStyle={rowStyle} issue_id={1} issue_title="issue row 1"/>{}
+          <IssueRow rowStyle={rowStyle} issue_id={2} issue_title="issue row 2"/>
+        </tbody>
+      </table>
     );
   }
 }
 
+class IssueRow extends React.Component {
+  render() {
+    const style = this.props.rowStyle;
+    return (
+      <tr>
+          <td style={style}>{this.props.issue_id}</td>
+          <td style={style}>{this.props.issue_title}</td>
+      </tr>
+    )
+  }
+}
 class IssueAdd extends React.Component {
   render() {
     return (
@@ -37,11 +61,13 @@ class IssueList extends React.Component {
         <hr />
         <IssueTable />
         <hr />
-        <IssueTable />
+        <IssueAdd />
       </React.Fragment>
     );
   }
 }
+
+
 const element = <IssueList />;
 ReactDOM.render(element, document.getElementById('contents'));
 
