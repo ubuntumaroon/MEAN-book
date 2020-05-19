@@ -20,6 +20,11 @@ var initialIssues = [{
   due: new Date('2018-08-30'),
   title: 'Missing bottom border on panel'
 }];
+var sampleIssue = {
+  status: 'New',
+  owner: 'SF',
+  title: 'Optional date'
+};
 
 class IssueFilter extends React.Component {
   render() {
@@ -28,8 +33,26 @@ class IssueFilter extends React.Component {
 
 }
 
+var counter = function () {
+  var count = 0;
+  return {
+    increase: function increase() {
+      count++;
+    },
+    log: function log(str) {
+      str = str || '';
+      console.log(count);
+    },
+    clear: function clear() {
+      count = 0;
+    }
+  };
+}();
+
 class IssueRow extends React.Component {
   render() {
+    counter.increase();
+    counter.log('IssueRendering: ');
     var issue = this.props.issue;
     return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
   }
@@ -40,8 +63,34 @@ class IssueTable extends React.Component {
   constructor() {
     super();
     this.state = {
-      issues: initialIssues
+      issues: []
     };
+    setTimeout(() => {
+      this.createIssue(sampleIssue);
+    }, 2000);
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  createIssue(issue) {
+    issue = Object.assign({}, issue);
+    issue.id = this.state.issues.length + 1;
+    issue.created = new Date();
+    var newIssueList = this.state.issues.slice();
+    newIssueList.push(issue);
+    this.setState({
+      issues: newIssueList
+    });
+  }
+
+  loadData() {
+    setTimeout(() => {
+      this.setState({
+        issues: initialIssues
+      });
+    }, 500);
   }
 
   render() {

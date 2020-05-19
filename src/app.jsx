@@ -14,6 +14,11 @@ const initialIssues = [
   },
 ];
 
+const sampleIssue = {
+  status: 'New', owner: 'SF', 
+  title: 'Optional date',
+}
+
 class IssueFilter extends React.Component {
   render() {
     return (
@@ -24,8 +29,26 @@ class IssueFilter extends React.Component {
   }
 }
 
+const counter = (function() {
+  let count = 0;
+  return {
+    increase: function() {
+      count++;
+    }, 
+    log: function(str) {
+      str = str || '';
+      console.log(count);
+    },
+    clear: function() {
+      count = 0;
+    }
+  }
+})();
+
 class IssueRow extends React.Component {
   render() {
+    counter.increase();
+    counter.log('IssueRendering: ');
     const issue = this.props.issue;
     return (
       <tr>
@@ -44,8 +67,31 @@ class IssueRow extends React.Component {
 class IssueTable extends React.Component {
   constructor() {
     super();
-    this.state = {issues: initialIssues};
+    this.state = {issues: []};
+    setTimeout(() => {
+      this.createIssue(sampleIssue);
+    }, 2000);
   }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  createIssue(issue) {
+    issue = Object.assign({}, issue);
+    issue.id = this.state.issues.length + 1;
+    issue.created = new Date();
+    const newIssueList = this.state.issues.slice();
+    newIssueList.push(issue);
+    this.setState({issues: newIssueList});
+  }
+
+  loadData() {
+    setTimeout(() => {
+      this.setState({issues: initialIssues});
+    }, 500);
+  }
+
   render() {
     const issueRows = this.state.issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
     return (
