@@ -37,7 +37,7 @@ const counter = (function() {
     }, 
     log: function(str) {
       str = str || '';
-      console.log(count);
+      console.log(str + count);
     },
     clear: function() {
       count = 0;
@@ -47,8 +47,6 @@ const counter = (function() {
 
 class IssueRow extends React.Component {
   render() {
-    counter.increase();
-    counter.log('IssueRendering: ');
     const issue = this.props.issue;
     return (
       <tr>
@@ -65,35 +63,8 @@ class IssueRow extends React.Component {
 }
 
 class IssueTable extends React.Component {
-  constructor() {
-    super();
-    this.state = {issues: []};
-    setTimeout(() => {
-      this.createIssue(sampleIssue);
-    }, 2000);
-  }
-
-  componentDidMount() {
-    this.loadData();
-  }
-
-  createIssue(issue) {
-    issue = Object.assign({}, issue);
-    issue.id = this.state.issues.length + 1;
-    issue.created = new Date();
-    const newIssueList = this.state.issues.slice();
-    newIssueList.push(issue);
-    this.setState({issues: newIssueList});
-  }
-
-  loadData() {
-    setTimeout(() => {
-      this.setState({issues: initialIssues});
-    }, 500);
-  }
-
   render() {
-    const issueRows = this.state.issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
+    const issueRows = this.props.issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
     return (
       <table style={{borderCollapse: "collapse"}}>
         <thead>
@@ -118,6 +89,13 @@ class IssueTable extends React.Component {
 
 
 class IssueAdd extends React.Component {
+  constructor() {
+    super();
+    setTimeout(() => {
+      this.props.createIssue(sampleIssue);
+    }, 2000);
+  }
+
   render() {
     return (
       <div>Add Issue component</div>
@@ -126,15 +104,40 @@ class IssueAdd extends React.Component {
 }
 
 class IssueList extends React.Component {
+  constructor() {
+    super();
+    this.state = {issues: []};
+    this.createIssue = this.createIssue.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  createIssue(issue) {
+    issue = Object.assign({}, issue);
+    issue.id = this.state.issues.length + 1;
+    issue.created = new Date();
+    const newIssueList = this.state.issues.slice();
+    newIssueList.push(issue);
+    this.setState({issues: newIssueList});
+  }
+
+  loadData() {
+    setTimeout(() => {
+      this.setState({issues: initialIssues});
+    }, 500);
+  }
+
   render() {
     return (
       <React.Fragment>
         <h1>Issue Tracker</h1>
         <IssueFilter />
         <hr />
-        <IssueTable />
+        <IssueTable issues={this.state.issues}/>
         <hr />
-        <IssueAdd />
+        <IssueAdd createIssue={this.createIssue}/>
       </React.Fragment>
     );
   }
