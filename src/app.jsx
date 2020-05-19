@@ -1,7 +1,7 @@
 /**
  * 
  */
-const issues = [
+const initialIssues = [
   {
     id: 1, status: 'New', owner: 'Ravan', effort: 5,
     created: new Date('2018-08-15'), due: undefined,
@@ -42,9 +42,12 @@ class IssueRow extends React.Component {
 }
 
 class IssueTable extends React.Component {
+  constructor() {
+    super();
+    this.state = {issues: initialIssues};
+  }
   render() {
-    const rowStyle = {border:"1px solid silver", padding: 4};
-    const issueRows = issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
+    const issueRows = this.state.issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
     return (
       <table style={{borderCollapse: "collapse"}}>
         <thead>

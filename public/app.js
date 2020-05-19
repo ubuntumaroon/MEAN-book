@@ -3,7 +3,7 @@
 /**
  * 
  */
-var issues = [{
+var initialIssues = [{
   id: 1,
   status: 'New',
   owner: 'Ravan',
@@ -37,12 +37,15 @@ class IssueRow extends React.Component {
 }
 
 class IssueTable extends React.Component {
-  render() {
-    var rowStyle = {
-      border: "1px solid silver",
-      padding: 4
+  constructor() {
+    super();
+    this.state = {
+      issues: initialIssues
     };
-    var issueRows = issues.map(issue => /*#__PURE__*/React.createElement(IssueRow, {
+  }
+
+  render() {
+    var issueRows = this.state.issues.map(issue => /*#__PURE__*/React.createElement(IssueRow, {
       key: issue.id,
       issue: issue
     }));
