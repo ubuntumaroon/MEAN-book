@@ -19,14 +19,12 @@ const sampleIssue = {
   title: 'Optional date',
 }
 
-class IssueFilter extends React.Component {
-  render() {
-    return (
-      <div>
-        All issue filters
-      </div>
-    );
-  }
+function IssueFilter() {
+  return (
+    <div>
+      All issue filters
+    </div>
+  );
 }
 
 const counter = (function() {
@@ -45,60 +43,71 @@ const counter = (function() {
   }
 })();
 
-class IssueRow extends React.Component {
-  render() {
-    const issue = this.props.issue;
-    return (
-      <tr>
-        <td>{issue.id}</td>
-        <td>{issue.status}</td>
-        <td>{issue.owner}</td>
-        <td>{issue.created.toDateString()}</td>
-        <td>{issue.effort}</td>
-        <td>{issue.due ? issue.due.toDateString() : ''}</td>
-        <td>{issue.title}</td>
-      </tr>
-    )
-  }
+function IssueRow(props) {
+  const issue = props.issue;
+  return (
+    <tr>
+      <td>{issue.id}</td>
+      <td>{issue.status}</td>
+      <td>{issue.owner}</td>
+      <td>{issue.created.toDateString()}</td>
+      <td>{issue.effort}</td>
+      <td>{issue.due ? issue.due.toDateString() : ''}</td>
+      <td>{issue.title}</td>
+    </tr>
+  )
 }
 
-class IssueTable extends React.Component {
-  render() {
-    const issueRows = this.props.issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
-    return (
-      <table style={{borderCollapse: "collapse"}}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Status</th>
-            <th>Owner</th>
-            <th>Created</th>
-            <th>Effort</th>
-            <th>Due Date</th>
-            <th>Title</th>
-          </tr>
-        </thead>
+function IssueTable(props) {
+  const issueRows = props.issues.map(issue => <IssueRow key={issue.id} issue={issue}/>);
+  return (
+    <table style={{borderCollapse: "collapse"}}>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Owner</th>
+          <th>Created</th>
+          <th>Effort</th>
+          <th>Due Date</th>
+          <th>Title</th>
+        </tr>
+      </thead>
 
-        <tbody>
-          {issueRows}
-        </tbody>
-      </table>
-    );
-  }
+      <tbody>
+        {issueRows}
+      </tbody>
+    </table>
+  );
 }
 
 
 class IssueAdd extends React.Component {
   constructor() {
     super();
-    setTimeout(() => {
-      this.props.createIssue(sampleIssue);
-    }, 2000);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const form = document.forms.issueAdd;
+    const issue = {
+      owner: form.owner.value, 
+      title: form.title.value,
+      status: 'new',
+    }
+    this.props.createIssue(issue);
+    form.owner.value = "";
+    form.title.value = "";
   }
 
   render() {
     return (
-      <div>Add Issue component</div>
+      <form name="issueAdd" onSubmit={this.handleSubmit}>
+        <input type="text" name="owner" placeholder="Owner" />
+        <input type="text" name="title" placeholder="Title" />
+        <button>Add</button>
+      </form>
     );
   }
 }
@@ -115,7 +124,7 @@ class IssueList extends React.Component {
   }
 
   createIssue(issue) {
-    issue = Object.assign({}, issue);
+    //issue = Object.assign({}, issue);
     issue.id = this.state.issues.length + 1;
     issue.created = new Date();
     const newIssueList = this.state.issues.slice();

@@ -26,11 +26,8 @@ var sampleIssue = {
   title: 'Optional date'
 };
 
-class IssueFilter extends React.Component {
-  render() {
-    return /*#__PURE__*/React.createElement("div", null, "All issue filters");
-  }
-
+function IssueFilter() {
+  return /*#__PURE__*/React.createElement("div", null, "All issue filters");
 }
 
 var counter = function () {
@@ -49,39 +46,55 @@ var counter = function () {
   };
 }();
 
-class IssueRow extends React.Component {
-  render() {
-    var issue = this.props.issue;
-    return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
-  }
-
+function IssueRow(props) {
+  var issue = props.issue;
+  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
 }
 
-class IssueTable extends React.Component {
-  render() {
-    var issueRows = this.props.issues.map(issue => /*#__PURE__*/React.createElement(IssueRow, {
-      key: issue.id,
-      issue: issue
-    }));
-    return /*#__PURE__*/React.createElement("table", {
-      style: {
-        borderCollapse: "collapse"
-      }
-    }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Effort"), /*#__PURE__*/React.createElement("th", null, "Due Date"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueRows));
-  }
-
+function IssueTable(props) {
+  var issueRows = props.issues.map(issue => /*#__PURE__*/React.createElement(IssueRow, {
+    key: issue.id,
+    issue: issue
+  }));
+  return /*#__PURE__*/React.createElement("table", {
+    style: {
+      borderCollapse: "collapse"
+    }
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Effort"), /*#__PURE__*/React.createElement("th", null, "Due Date"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueRows));
 }
 
 class IssueAdd extends React.Component {
   constructor() {
     super();
-    setTimeout(() => {
-      this.props.createIssue(sampleIssue);
-    }, 2000);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    var form = document.forms.issueAdd;
+    var issue = {
+      owner: form.owner.value,
+      title: form.title.value,
+      status: 'new'
+    };
+    this.props.createIssue(issue);
+    form.owner.value = "";
+    form.title.value = "";
   }
 
   render() {
-    return /*#__PURE__*/React.createElement("div", null, "Add Issue component");
+    return /*#__PURE__*/React.createElement("form", {
+      name: "issueAdd",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      name: "owner",
+      placeholder: "Owner"
+    }), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      name: "title",
+      placeholder: "Title"
+    }), /*#__PURE__*/React.createElement("button", null, "Add"));
   }
 
 }
@@ -100,7 +113,7 @@ class IssueList extends React.Component {
   }
 
   createIssue(issue) {
-    issue = Object.assign({}, issue);
+    //issue = Object.assign({}, issue);
     issue.id = this.state.issues.length + 1;
     issue.created = new Date();
     var newIssueList = this.state.issues.slice();
