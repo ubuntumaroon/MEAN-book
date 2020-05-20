@@ -15,6 +15,16 @@ type Query {
   issueList: [Issue!]!
 }
 
+input IssueInputs {
+  title: String!
+  "optional, default new if not provided"
+  status: String
+  owner: String
+  effort: Int
+  due: GraphQLDate
+}
+
 type Mutation {
   setAboutMessage(message: String!): String
+  issueAdd(issue: IssueInputs!): Issue!
 }
