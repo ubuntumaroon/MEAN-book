@@ -29,9 +29,8 @@ const GraphQLDate = new GraphQLScalarType({
   parseValue(value) {
     return new Date(value);
   },
-
   parseLiteral(ast) {
-    return (ast.kind ==  Kind.STRING) ? new Date(ast.value) : undefined;
+    return (ast.kind == Kind.STRING) ? new Date(ast.value) : undefined;
   },
 });
 
@@ -44,6 +43,7 @@ const resolvers = {
     setAboutMessage,
     issueAdd,
   },
+  GraphQLDate,
 };
 
 function issueList() {
@@ -56,7 +56,7 @@ function setAboutMessage(_, { message }) {
 
 function issueAdd(_, { issue }) {
   issue.created = new Date();
-  console.log('creating id: ' + issue.id);
+  issue.id = issuesDB.length + 1;
   if (issue.status == undefined) issue.status = 'New';
   issuesDB.push(issue);
   return issue;
