@@ -20,6 +20,7 @@ var initialIssues = [{
   due: new Date('2018-08-30'),
   title: 'Missing bottom border on panel'
 }];
+
 var sampleIssue = {
   status: 'New',
   owner: 'SF',
