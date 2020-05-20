@@ -1,21 +1,30 @@
 const fs = require('fs');
 const express = require('express');
 const {ApolloServer} = require('apollo-server-express');
+const {GraphQLScalarType} = require('graphql');
 
 let aboutMessage = "Issue tracker v1.0";
 
 const issuesDB = [
   {
     id: 1, status: 'New', owner: 'Ravan', effort: 5,
-    created: new Date('2018-08-15'), due: undefined,
+    created: new Date('2019-01-15'), due: undefined,
     title: 'Error in console when clicking Add',
   },
   {
     id: 2, status: 'Assigned', owner: 'Eddie', effort: 14,
-    created: new Date('2018-08-16'), due: new Date('2018-08-30'),
+    created: new Date('2019-01-16'), due: new Date('2019-02-01'),
     title: 'Missing bottom border on panel',
   },
 ];
+
+const GraphQLDate = new GraphQLScalarType({
+  name: 'GraphQLDate',
+  description: 'GraphQL date type scalar',
+  serialize(value) {
+    return value.toISOString();
+  },
+});
 
 const resolvers = {
   Query: {
@@ -37,6 +46,7 @@ function setAboutMessage(_, { message }) {
 const server = new ApolloServer({
   typeDefs: fs.readFileSync('./server/schema.graphql', 'utf-8'),
   resolvers,
+  GraphQLDate,
 });
 
 const app = express();
