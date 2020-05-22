@@ -6,6 +6,10 @@ dist
 credentials.json
 deploy
 .code-workspace
+.vscode
+
+# eslint file
+.eslintrc
 
 # Compiled class file
 *.class
