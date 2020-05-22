@@ -209,7 +209,7 @@ class IssueList extends React.Component {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              query = "query {\n      issueList {\n        id title status owner\n        created effort due\n      }\n    }";
+              query = "query {\n      issueList {\n        _id id title status owner\n        created effort due\n      }\n    }";
               _context2.next = 3;
               return graphqlFetch(query);
 

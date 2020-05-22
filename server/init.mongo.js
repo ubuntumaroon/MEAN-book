@@ -18,12 +18,21 @@ const issuesDB = [
     created: new Date('2019-01-16'), due: new Date('2019-02-01'),
     title: 'Missing bottom border on panel',
   },
+  {
+    id: 3, status: 'New', owner: 'Elli', effort: 100,
+    created: new Date('2019-02-16'), due: new Date('2019-03-01'),
+    title: 'Hard tasks',
+  },
 ];
 
 db.issues.insertMany(issuesDB);
 
 const count = db.issues.count();
 print('Inserted', count, 'issues');
+
+// counter for issur id
+db.counters.remove({ _id: 'issues' });
+db.counters.insert({ _id: 'issues', current: count});
 
 db.issues.createIndex({ id: 1 }, { unique: true });
 db.issues.createIndex({ status: 1});
