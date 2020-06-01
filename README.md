@@ -1,7 +1,9 @@
 # MEAN-book
 
 ## Chapter 10
-Installed jquery popper.js as peer dependence for bootstrap
+Installed jquery popper.js as peer dependence for bootstrap@4
+
+installed react-icons
 
 ## Chapter 9
 
