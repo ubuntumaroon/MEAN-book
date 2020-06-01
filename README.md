@@ -1,5 +1,8 @@
 # MEAN-book
 
+## Chapter 10
+Installed jquery popper.js as peer dependence for bootstrap
+
 ## Chapter 9
 
 In 'IssueDetails',
