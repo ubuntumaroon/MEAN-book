@@ -1,3 +1,9 @@
+# auto generated files
+ui/public/*.js
+ui/public/*.map
+ui/server/About.js
+
+#
 .DS_Store
 node_modules
 package-lock.json
