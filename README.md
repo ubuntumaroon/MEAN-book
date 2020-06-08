@@ -1,5 +1,14 @@
 # MEAN-book
 
+## Chapter 12
+Page 399. React.render did not generate warnings, but React.hydrate creates 
+warning when loading pages other than /about from server. Add following code 
+can fix the problem.
+``` javascript
+  const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
+  renderMethod(element, document.getElementById('contents'));
+```
+
 ## Chapter 11
 
 On page 332:
