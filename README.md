@@ -1,5 +1,17 @@
 # MEAN-book
 
+## Deploy to Heroku
+  ### MongoDB
+    White list Heroku:
+    Heroku ips are distributed in many areas, so whtielist all ips:
+    add: 0.0.0.0/0 to whitelist all IPs
+
+  ### React-select
+  Latest version "react-select", "async" should be lower case:
+  ``` javascript
+    import AsyncSelect from 'react-select/async';
+  ```
+
 ## Chapter 12
 Page 399. React.render did not generate warnings, but React.hydrate creates 
 warning when loading pages other than /about from server. Add following code 
