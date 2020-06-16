@@ -1,3 +1,8 @@
+# auto generated files
+ui/public/*.js
+ui/public/*.map
+
+#
 .DS_Store
 node_modules
 package-lock.json
@@ -6,6 +11,10 @@ dist
 credentials.json
 deploy
 .code-workspace
+.vscode
+
+# eslint file
+.eslintrc
 
 # Compiled class file
 *.class
