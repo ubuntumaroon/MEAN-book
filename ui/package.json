@@ -39,6 +39,7 @@
   "dependencies": {
     "@ungap/url-search-params": "github:ungap/url-search-params",
     "bootstrap": "^4.5.0",
+    "classnames": "^2.2.6",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

@@ -1,5 +1,8 @@
 # MEAN-book
 
+## Additional package
+  - [classNames](https://github.com/JedWatson/classnames) package
+
 ## Deploy to Heroku
   ### Heroku
   Proxy mode: Cookie Domain should be set to UI domain.
