@@ -3,7 +3,7 @@
 ## Deploy to Heroku
   ### Heroku
   Proxy mode: Cookie Domain should be set to UI domain.
-  ```
+  ``` shell
   heroku config:set COOKIE_DOMAIN=pro-mern-tracker-ui.herokuapp.com
   ```
   ### MongoDB
