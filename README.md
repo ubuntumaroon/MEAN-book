@@ -1,10 +1,18 @@
 # MEAN-book
 
 ## Deploy to Heroku
+  ### Heroku
+    Proxy mode: Cookie Domain should be set to UI domain.
+    ```
+      heroku config:set COOKIE_DOMAIN=pro-mern-tracker-ui.herokuapp.com
+    ```
   ### MongoDB
     White list Heroku:
     Heroku ips are distributed in many areas, so whtielist all ips:
     add: 0.0.0.0/0 to whitelist all IPs
+
+  ### Git 
+  [split subfolder out into a new repository](https://help.github.com/en/github/using-git/splitting-a-subfolder-out-into-a-new-repository)
 
   ### React-select
   Latest version "react-select", "async" should be lower case:
