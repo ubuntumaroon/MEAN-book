@@ -2,6 +2,9 @@
 
 ## Additional package
   - [classNames](https://github.com/JedWatson/classnames) package
+  - replaced ["@babel/polyfill"](https://babeljs.io/docs/en/babel-polyfill) with 
+    - "core-js/stable";
+    - "regenerator-runtime/runtime";
 
 ## Deploy to Heroku
   ### Heroku
